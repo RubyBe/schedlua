@@ -37,11 +37,19 @@ local function counter(name, nCount)
 	halt();
 end
 
+--local function main()
+--spawn returns coop with a default value of 100 for the priority; calling coop directly allows you to set a priority - coop(priority, func, ...)
+--	local t0 = spawn(counter, "counter1", 5)
+--	local t1 = spawn(task1)
+--	local t2 = spawn(task2)
+--	local t3 = spawn(counter, "counter2", 7)
+--end
+
 local function main()
-	local t0 = spawn(counter, "counter1", 5)
-	local t1 = spawn(task1)
-	local t2 = spawn(task2)
-	local t3 = spawn(counter, "counter2", 7)
+	local t0 = coop(100, counter, "counter1", 5)
+	local t1 = coop(100, task1)
+	local t2 = coop(100, task2)
+	local t3 = coop(0, counter, "counter2", 7)
 end
 
 run(main)

@@ -4,7 +4,7 @@
 -- is a global variable.
 -- If it has already been created, we simply return that single instance.
 
---print("== KERNEL INCLUDED ==")
+print("== KERNEL INCLUDED ==")
 
 if Kernel ~= nil then
 	return Kernel;

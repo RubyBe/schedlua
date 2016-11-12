@@ -1,6 +1,7 @@
 --[[
 	Queue
 --]]
+print("== QUEUE INCLUDED ==")
 local Queue = {}
 setmetatable(Queue, {
 	__call = function(self, ...)

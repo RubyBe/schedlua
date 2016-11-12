@@ -4,6 +4,7 @@ local ffi = require("ffi");
 local Queue = require("schedlua.queue")
 local Task = require("schedlua.task");
 
+print("== SCHEDULER INCLUDED==")
 
 --[[
 	The Scheduler supports a cooperative multi-tasking
@@ -98,7 +99,7 @@ end
 -- The 'params' is a table of parameters which will be passed to the function
 -- when it's ready to run.
 function Scheduler.scheduleTask(self, task, params, priority)
-	--print("Scheduler.scheduleTask: ", task, params)
+	print("Scheduler.scheduleTask: ", task, params)
 	params = params or {}
 	
 	if not task then

@@ -2,6 +2,8 @@
 --[[
 	Task, contains stuff related to encapsulated code
 --]]
+
+print("== TASK INCLUDED ==")
 local Task = {}
 
 setmetatable(Task, {
