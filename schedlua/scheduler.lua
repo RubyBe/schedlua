@@ -99,23 +99,23 @@ end
 -- The 'params' is a table of parameters which will be passed to the function
 -- when it's ready to run.
 function Scheduler.scheduleTask(self, task, params, priority)
-	print("Scheduler.scheduleTask: ", task, params)
+	--print("Scheduler.scheduleTask: ", task, params)
 	params = params or {}
 	
 	if not task then
 		return false, "no task specified"
 	end
-
+	-- this is totally screwy to me - "priority" is nill everywhere, but "Priority" holds the appropriate value. I changed "if priority" to "if task.Priority" and it works now, but i have no idea why
 	task:setParams(params);
-	
-	if priority == 0 then
+	if task.Priority == 0 then
+		--print("if: ", task.Priority);
 		self.TasksReadyToRun:pushFront(task);	
 	else
+		--print("else: ", task.Priority);
 		self.TasksReadyToRun:enqueue(task);	
 	end
 
 	task.state = "readytorun"
-
 	return task;
 end
 
@@ -135,6 +135,7 @@ end
 function Scheduler.step(self)
 	-- Now check the regular fibers
 	local task = self.TasksReadyToRun:dequeue()
+	--print("task in step: ", priority);
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then
@@ -178,7 +179,7 @@ function Scheduler.step(self)
 	local success = results[1];
 	table.remove(results,1);
 
---print("PCALL, RESUME: ", pcallsuccess, success)
+	--print("PCALL, RESUME: ", pcallsuccess, success)
 
 	-- no task is currently executing
 	self.CurrentFiber = nil;

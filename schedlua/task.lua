@@ -50,12 +50,13 @@ end
 
 function Task.setParams(self, params)
 	self.params = params
-
+	--print(params[1]);
 	return self;
 end
 
 function Task.resume(self)
 --print("Task, RESUMING: ", unpack(self.params));
+--print(self.params[0]);
 	return coroutine.resume(self.routine, unpack(self.params));
 end
 

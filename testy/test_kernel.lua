@@ -47,6 +47,8 @@ end
 
 local function main()
 	local t0 = coop(100, counter, "counter1", 5)
+	--print("in test main: ", t0.TaskID);
+	--print("in test main: ", t0.Priority);
 	local t1 = coop(100, task1)
 	local t2 = coop(100, task2)
 	local t3 = coop(0, counter, "counter2", 7)
