@@ -102,10 +102,11 @@ function Scheduler.scheduleTask(self, task, params, priority)
 	--print("Scheduler.scheduleTask: ", task, params)
 	params = params or {}
 	
-	table.sort(self.TasksReadyToRun, function(a, b) return a[1] < b[1] end)
+	--table.sort(self.TasksReadyToRun, function(a, b) return a[1] < b[1] end)
 
 	for i, j in pairs(self.TasksReadyToRun) do
 	 print("TasksReadyToRun: ", i, j);
+	 --print("Priority: ", task.Priority);
 	end
 	
 	if not task then
