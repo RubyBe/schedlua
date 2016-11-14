@@ -5,7 +5,7 @@
 #### Interface
 
 
-![Interface](images/Interface.png)
+![Interface](images/Interface.PNG)
 
 #### Underlying processes
 1. Priority is linear and relative but completely customizable (1-10, -10-10, 0-1000, -1000-1000, etc.)
