@@ -23,7 +23,6 @@ Queue.init = function(self, first, last, name)
 		name=name};
 
 	setmetatable(obj, Queue_mt);
-
 	return obj
 end
 
@@ -45,7 +44,6 @@ function Queue:enqueue(value)
 	local last = self.last + 1
 	self.last = last
 	self[last] = value
-
 	return value
 end
 
@@ -88,6 +86,5 @@ function Queue:Entries(func, param)
 
 	return closure;
 end
-
-
+print(#Queue);
 return Queue;

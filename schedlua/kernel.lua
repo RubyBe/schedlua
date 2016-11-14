@@ -44,8 +44,6 @@ local function coop(priority, func, ...)
 	local task = Task(func, ...)
 	task.TaskID = getNewTaskID();
 	task.Priority = priority;
-	--print("in coop, priority: ", task.priority);
-	--print("in coop, Priority: ", task.Priority);
 	return Kernel.Scheduler:scheduleTask(task, {...});
 end
 

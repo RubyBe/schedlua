@@ -63,7 +63,6 @@ function Scheduler.init(self, ...)
 		TasksReadyToRun = Queue();
 	}
 	setmetatable(obj, Scheduler_mt)
-	
 	return obj;
 end
 
@@ -84,6 +83,7 @@ end
 	on how many tasks there are.
 --]]
 function Scheduler.tasksPending(self)
+	print("in tasks pending: ", self.TasksReadyToRun:length());
 	return self.TasksReadyToRun:length();
 end
 
@@ -102,18 +102,29 @@ function Scheduler.scheduleTask(self, task, params, priority)
 	--print("Scheduler.scheduleTask: ", task, params)
 	params = params or {}
 	
+	table.sort(self.TasksReadyToRun, function(a, b) return a[1] < b[1] end)
+
+	for i, j in pairs(self.TasksReadyToRun) do
+	 print("TasksReadyToRun: ", i, j);
+	end
+	
 	if not task then
 		return false, "no task specified"
 	end
 	-- this is totally screwy to me - "priority" is nill everywhere, but "Priority" holds the appropriate value. I changed "if priority" to "if task.Priority" and it works now, but i have no idea why
 	task:setParams(params);
-	if task.Priority == 0 then
-		--print("if: ", task.Priority);
-		self.TasksReadyToRun:pushFront(task);	
-	else
-		--print("else: ", task.Priority);
+	--print("Priority: ", task.Priority)
+	self.TasksReadyToRun:enqueue(task);
+	
+	--[[if task.Priority == 0 then
+		print("If: ", task.Priority)
+		self.TasksReadyToRun:pushFront(task);
+	end		
+
+	if task.Priority == 100 then
+		print("Else: ", task.Priority)
 		self.TasksReadyToRun:enqueue(task);	
-	end
+	end ]]--
 
 	task.state = "readytorun"
 	return task;
@@ -134,6 +145,11 @@ end
 
 function Scheduler.step(self)
 	-- Now check the regular fibers
+	i = 1
+	while i < 5 do 
+		i = i + 1;
+	end
+
 	local task = self.TasksReadyToRun:dequeue()
 	--print("task in step: ", priority);
 
